@@ -1,23 +1,24 @@
-# URLS for Jaeger and Grafana
-JAEGER_URL="https://tracing-istio-system.$(minishift ip).nip.io"
-GRAFANA_URL="https://grafana-istio-system.$(minishift ip).nip.io"
-VERSION_LABEL="v0.10.0"
+#!/bin/bash
 
-# Installs Kiali's configmap
-curl https://raw.githubusercontent.com/kiali/kiali/${VERSION_LABEL}/deploy/openshift/kiali-configmap.yaml | \
-  VERSION_LABEL=${VERSION_LABEL} \
-  JAEGER_URL=${JAEGER_URL}  \
-  GRAFANA_URL=${GRAFANA_URL} envsubst | oc create -n istio-system -f -
+# change these URLs to
+# echo "https://$(minikube -p istio ip):$(kubectl get svc jaeger-query -n istio-system -o 'jsonpath={.spec.ports[0].nodePort}')"
+# and
+# echo "https://$(minikube -p istio ip):$(kubectl get svc grafana -n istio-system -o 'jsonpath={.spec.ports[0].nodePort}')"
 
-# Installs Kiali's secrets
-curl https://raw.githubusercontent.com/kiali/kiali/${VERSION_LABEL}/deploy/openshift/kiali-secrets.yaml | \
-  VERSION_LABEL=${VERSION_LABEL} envsubst | oc create -n istio-system -f -
+export JAEGER_URL=https://$(minikube -p istio ip):$(kubectl get svc jaeger-query -n istio-system -o 'jsonpath={.spec.ports[0].nodePort}')
+export GRAFANA_URL=https://$(minikube -p istio ip):$(kubectl get svc grafana -n istio-system -o 'jsonpath={.spec.ports[0].nodePort}')
+export VERSION_LABEL="v0.15.0"
+export IMAGE_VERSION="v0.15.0"
+export KIALI_USERNAME="admin"
+export KIALI_PASSPHRASE="admin"
 
-# Deploys Kiali to the cluster
-curl https://raw.githubusercontent.com/kiali/kiali/${VERSION_LABEL}/deploy/openshift/kiali.yaml | \
-  VERSION_LABEL=${VERSION_LABEL}  \
-  IMAGE_NAME=kiali/kiali \
-  IMAGE_VERSION=${VERSION_LABEL}  \
-  NAMESPACE=istio-system  \
-  VERBOSE_MODE=4  \
-  IMAGE_PULL_POLICY_TOKEN="imagePullPolicy: Always" envsubst | oc create -n istio-system -f -
+bash <(curl -L http://git.io/getLatestKialiKubernetes)
+
+# git clone -b ${VERSION_LABEL} https://github.com/kiali/kiali
+
+# cd kiali/deploy/kubernetes
+# ./deploy-kiali-to-kubernetes.sh
+
+open https://$(minikube -p istio ip):$(kubectl get svc kiali -n istio-system -o 'jsonpath={.spec.ports[0].nodePort}')/kiali/console
+
+
