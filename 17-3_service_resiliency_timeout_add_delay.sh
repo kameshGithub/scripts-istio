@@ -5,7 +5,7 @@
 # Update RecommendationResource.java making it a slow performer with a 3 second delay.
 # recommendation/java/quarkus/src/main/java/com/redhat/developer/demos/recommendation/rest/RecommendationResource.java
 
-eval $(minikube -p istiok docker-env)
+eval $(minikube -p $profile docker-env)
 
 cd ../istio-tutorial/recommendation/java/quarkus
 

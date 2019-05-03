@@ -10,9 +10,9 @@ export KUBE_EDITOR="code -w"
 export ISTIO_VERSION="1.1.3"
 export ISTIO_HOME=/Users/kameshc/KAMESH/WORK/CODE/istio/istio-$ISTIO_VERSION
 export PATH=$ISTIO_HOME/bin:$PATH
-export NAMESPACE="istio"
+export profile="istio"
 
-eval $(minikube --profile $NAMESPACE docker-env)
+eval $(minikube --profile $profile docker-env)
 
 echo 'the following after minikube as started'
 echo 'eval $(minikube --profile istio docker-env)'
