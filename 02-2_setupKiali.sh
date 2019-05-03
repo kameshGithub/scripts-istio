@@ -1,8 +1,4 @@
 #!/bin/bash
-export GRAFANA_URL=http://$(minikube -p $profile ip):$(kubectl get svc grafana -n istio-system -o 'jsonpath={.spec.ports[0].nodePort}')
-export PROMETHEUS_URL=http://$(minikube -p $profile ip):$(kubectl get svc prometheus -n istio-system -o 'jsonpath={.spec.ports[0].nodePort}')
-export JAEGER_URL=http://$(minikube -p $profile ip):$(kubectl get svc jaeger-query -n istio-system -o 'jsonpath={.spec.ports[0].nodePort}')
-
 
 # TODO: Update configmap with GRAFANA_URL url
 # Installs Kiali's configmap
@@ -34,6 +30,7 @@ data:
 
 
 kubectl patch service/kiali -p '{"spec":{"type":"NodePort"}}' -n istio-system
-open http://$(minikube -p $profile ip):$(kubectl get svc kiali -n istio-system -o 'jsonpath={.spec.ports[0].nodePort}')/kiali/console
+
+export KIALI_URL=http://$(minikube -p $profile ip):$(kubectl get svc kiali -n istio-system -o 'jsonpath={.spec.ports[0].nodePort}')/kiali/console
 
 # kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=kiali -o jsonpath='{.items[0].metadata.name}') 20001:20001
