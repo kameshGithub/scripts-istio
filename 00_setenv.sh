@@ -10,7 +10,7 @@ export KUBE_EDITOR="code -w"
 export ISTIO_VERSION="1.1.3"
 export ISTIO_HOME=/Users/kameshc/KAMESH/WORK/CODE/istio/istio-$ISTIO_VERSION
 export PATH=$ISTIO_HOME/bin:$PATH
-export profile="default"
+export profile="istiok"
 
 eval $(minikube --profile $profile docker-env)
 

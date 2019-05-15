@@ -1,3 +1,3 @@
 #!/bin/bash
 
-kubectl patch svc/recommendation -p '{"spec":{"selector":{"app":"recommendation-v2"}}}'
+kubectl patch service/recommendation -p '{"spec":{"selector":{"app":"recommendation","version":"v2"}}}' -n tutorial
