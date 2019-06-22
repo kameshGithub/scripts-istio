@@ -1,11 +1,11 @@
 #!/bin/bash
 step=0
 
-canary[1]="kubectl replace -f ../istio-tutorial/istiofiles/virtual-service-recommendation-v1_and_v2_90_10.yml -n tutorial"
-canary[2]="kubectl replace -f ../istio-tutorial/istiofiles/virtual-service-recommendation-v1_and_v2_75_25.yml -n tutorial"
-canary[3]="kubectl replace -f ../istio-tutorial/istiofiles/virtual-service-recommendation-v1_and_v2_25_75.yml -n tutorial"
-canary[4]="kubectl replace -f ../istio-tutorial/istiofiles/virtual-service-recommendation-v1_and_v2_10_90.yml -n tutorial"
-canary[5]="kubectl replace -f ../istio-tutorial/istiofiles/virtual-service-recommendation-v2.yml -n tutorial"
+canary[1]="kubectl replace -f ../istio-tutorial/istiofiles/virtual-service-recommendation-v1_and_v2_90_10.yml -n $NAMESPACE"
+canary[2]="kubectl replace -f ../istio-tutorial/istiofiles/virtual-service-recommendation-v1_and_v2_75_25.yml -n $NAMESPACE"
+canary[3]="kubectl replace -f ../istio-tutorial/istiofiles/virtual-service-recommendation-v1_and_v2_25_75.yml -n $NAMESPACE"
+canary[4]="kubectl replace -f ../istio-tutorial/istiofiles/virtual-service-recommendation-v1_and_v2_10_90.yml -n $NAMESPACE"
+canary[5]="kubectl replace -f ../istio-tutorial/istiofiles/virtual-service-recommendation-v2.yml -n $NAMESPACE"
 
 canarySize[1]="10%"
 canarySize[2]="25%"

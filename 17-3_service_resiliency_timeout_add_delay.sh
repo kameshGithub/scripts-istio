@@ -13,9 +13,9 @@ mvn clean package -DskipTests
 
 docker build -t example/recommendation:v2 .
 
-istioctl kube-inject -f ../../kubernetes/Deployment-v2.yml | kubectl apply -f - -n tutorial
+istioctl kube-inject -f ../../kubernetes/Deployment-v2.yml | kubectl apply -f - -n $NAMESPACE
 
-kubectl delete pod --force --grace-period=0 -l app=recommendation,version=v2 -n tutorial
+kubectl delete pod --force --grace-period=0 -l app=recommendation,version=v2 -n $NAMESPACE
 
 cd ../../../../scripts-istio
 

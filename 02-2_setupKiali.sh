@@ -31,6 +31,7 @@ data:
 
 kubectl patch service/kiali -p '{"spec":{"type":"NodePort"}}' -n istio-system
 
-export KIALI_URL=http://$(minikube -p $profile ip):$(kubectl get svc kiali -n istio-system -o 'jsonpath={.spec.ports[0].nodePort}')/kiali/console
+export KIALI_URL=http://$K8S_HOST:$(kubectl get svc kiali -n istio-system -o 'jsonpath={.spec.ports[0].nodePort}')/kiali/console
 
+open $KIALI_URL
 # kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=kiali -o jsonpath='{.items[0].metadata.name}') 20001:20001

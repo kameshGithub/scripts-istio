@@ -1,6 +1,5 @@
 #!/bin/bash
-
-kubectl scale deployment recommendation-v2 --replicas=1 -n tutorial
-kubectl delete pod -l app=recommendation,version=v2
-kubectl delete virtualservice/recommendation
-kubectl delete destinationrule/recommendation
+kubectl delete gateway --all
+kubectl delete virtualservice --all
+kubectl delete destinationrule --all
+kubectl delete policy --all

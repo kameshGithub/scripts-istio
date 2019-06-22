@@ -9,7 +9,7 @@
 # You will see it works every time because Istio will retry the recommendation 
 # service automatically and it will land on v1 only
 
-kubectl exec -it -n tutorial $(kubectl get pods -n tutorial|grep recommendation-v2|awk '{ print $1 }'|head -1) -c recommendation /bin/bash
+kubectl exec -it -n $NAMESPACE $(kubectl get pods -n $NAMESPACE|grep recommendation-v2|awk '{ print $1 }'|head -1) -c recommendation /bin/bash
 
 curl localhost:8080/misbehave
 exit

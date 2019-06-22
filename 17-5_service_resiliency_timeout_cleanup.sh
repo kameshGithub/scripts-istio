@@ -13,12 +13,12 @@
 
 # docker build -t example/recommendation:v2 .
 
-# istioctl kube-inject -f ../../kubernetes/Deployment-v2.yml | kubectl apply -f - -n tutorial
+# istioctl kube-inject -f ../../kubernetes/Deployment-v2.yml | kubectl apply -f - -n $NAMESPACE
 
-# kubectl delete pod --force --grace-period=0 -l app=recommendation,version=v2 -n tutorial
+# kubectl delete pod --force --grace-period=0 -l app=recommendation,version=v2 -n $NAMESPACE
 
 # cd ../../../../scripts-istio
 
-kubectl delete -f ../istio-tutorial/istiofiles/virtual-service-recommendation-timeout.yml -n tutorial
+kubectl delete -f ../istio-tutorial/istiofiles/virtual-service-recommendation-timeout.yml -n $NAMESPACE
 
 #  Observe  the load-balancing between v1 and v2 but with v2 taking a bit of time to respond
