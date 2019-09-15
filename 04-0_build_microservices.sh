@@ -8,8 +8,6 @@
 # which is a peer of 'istio-tutorial'
 # assumes you have 'kubens tutorial' or 'oc project tutorial'
 
-kubectl create namespace $NAMESPACE
-kubectl label namespace $NAMESPACE istio-injection=enabled
 kubens $NAMESPACE
 
 # Customer

@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# 33%-66%
 # Remove the istio object virtual service and destination rule
 ./12-clean_vs_dr.sh
 
